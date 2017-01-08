@@ -1,4 +1,5 @@
 # NUDT硕士博士研究生开题报告latex模板说明
+
 # 前言
 用过latex就会知道它的好，但是没有模板的时候真的很痛。所以"NUDT硕士博士研究生开题报告latex模板"应运而生了。
 
@@ -53,7 +54,7 @@ nudtProposal.tex 中的注释已有详细说明：
 ```
 \enabletablebib{yes}  
 ```
-再编译一次，参考文献就会放在表里了。
+再编译一次，参考文献就会放在表里了。如果你遇到了参考文献不正常的情况，不要着急，改为no之后，编译几次就会正常。
 
 ## 图表插入
 
@@ -93,4 +94,4 @@ nudtProposal.tex 中的注释已有详细说明：
 
 作者也会尽力维护模板，但是毕竟能力时间有限，盼望同学们一起来完善模板。
 
-Contant: hanlin_tan@nudt.edu.cn
+Contact: hanlin_tan@nudt.edu.cn

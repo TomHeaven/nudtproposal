@@ -1,0 +1,180 @@
+%% 正文需要的宏
+\usepackage{mdframed} % 页面边框
+\usepackage{titlesec}   %设置页眉页脚的宏包
+\usepackage{fancyhdr} % 页眉页脚
+\usepackage{tabularx}  % 表格宽度
+\usepackage{multirow} % 表格单元格合并
+\usepackage{caption}   % 图表标题
+
+
+% 重定义图表标题
+%\renewcommand{\figurename}{图 } 
+%\renewcommand{\tablename}{表 } 
+\captionsetup[figure]{labelfont={},name={图 },labelsep=space}
+\captionsetup[table]{labelfont={},name={表 },labelsep=space}
+
+% 重定义标题格式
+%\titleformat{command}[shape]{format}{label}{sep}{before-code}{after-code}
+\titleformat{\section}{\heiti}{\thesection、}{5 pt}{}
+\titlespacing*{\section} {0pt}{0ex}{.2ex} % 设置标题前后间距
+\titleformat{\subsection}{\kaishu \small \bfseries}{\thesubsection}{5 pt}{}
+\titleformat{\subsubsection}{\kaishu \small}{\thesubsubsection}{5 pt}{}
+% 定义upcite
+\newcommand{\upcite}[1]{\textsuperscript{ [\cite{#1}]  }} % 中文引用
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}} % 单元格换行
+% 首页图案
+\schoollogo{scale=0.35}{nudt_logo}% university logo
+\schooltext{scale=0.9}{nudt_text}% university logo
+
+% 定义字符串比较函数
+\makeatletter
+\def\instring#1#2{TT\fi\begingroup
+	\edef\x{\endgroup\noexpand\in@{#1}{#2}}\x\ifin@}
+\makeatother
+
+
+% 修改参考文献格式
+% 开题报告类型
+\newcommand\enabletablebib[1]{%	
+	\ifstrequal{#1}{yes}{\newcommand\printbib{\printbibtabular[title={~}]}	}{	\newcommand\printbib{\printbibliography[title={~}]}}
+}
+
+% demo new tabular bibliography format
+\usepackage{csquotes}
+\usepackage[american]{babel}
+%\usepackage[backend=biber, bibstyle=numeric, citestyle=numeric]{biblatex} % 设定引用格式
+%\usepackage[backend=biber, style=caspervector,utf8, sorting=nty]{biblatex} % 设定引用格式
+\usepackage[backend=biber, style=Biblio/nudtcaspervector,utf8, sorting=none]{biblatex} % 设定引用格式
+%\usepackage[backend=biber, style=gbt77142005, utf8]{biblatex} % 设定引用格式
+
+\makeatletter
+% user-level command for printing tabular bibliography
+\let\printbibtabular\printbibliography
+\patchcmd{\printbibtabular}{\blx@printbibliography}{\bbx@printbibtabular}{}{}
+\patchcmd{\printbibtabular}{\blx@printbibliography}{\bbx@printbibtabular}{}{}
+
+\let\bbx@printbibtabular\blx@printbibliography
+\patchcmd{\bbx@printbibtabular}{\blx@bibliography}{\bbx@bibtabular}{}{}
+\patchcmd{\bbx@printbibtabular}
+{\def\blx@theenv{bibliography}}{\def\blx@theenv{bibtabular}}{}{}
+
+% underlying macros
+\def\bbx@bibtabular#1{%
+	\blx@bibheading\blx@theheading\blx@thetitle
+	\blx@bibnote\blx@theprenote
+	\begingroup
+	\blx@bibinit
+	\let\@noitemerr\@empty
+	\let\blx@noitem\blx@warn@bibempty
+	\ifnum\bibinitsep=\z@
+	\let\blx@initsep\relax
+	\fi
+	\ifnum\bibnamesep=\z@
+	\let\blx@namesep\relax
+	\fi
+	\csuse{blx@hook@bibinit}%
+	% copy filtered list of entries to internal list macro
+	\def\blx@do##1{%
+		\blx@ifdata{##1}{%
+			\begingroup
+			\blx@getdata{##1}
+			\blx@bibcheck
+			\iftoggle{blx@skipentry}{}{%
+				\global\let\blx@noitem\@empty
+				\listadd\blx@tempa{##1}}%
+			\endgroup}{}}
+	\let\blx@done\relax
+	
+	% 文献计数器
+	\newcounter{count}
+	\value{count}=0 % 初值为0
+	\blx@listloop{#1}
+	% tabular output for each item in list macro 表格中的每行内容（& 为分隔符， \\ \hline 为换行和横线）
+	%	\def\do##1{\bbx@tab@label{##1} & \bbx@tab@item{##1} \\ \hline}
+	\def\do##1{ \stepcounter{count}  % count++
+		[\arabic{count}] & \bbx@tab@item{##1} \\ \hline  %表格一行的内容
+	}
+	\csuse{blx@env@\blx@theenv}%
+	\dolistloop{\blx@tempa}
+	\csuse{blx@endenv@\blx@theenv}%
+	\blx@bibnote\blx@thepostnote
+	\endgroup}
+
+\def\bbx@tab@label#1{%
+	\begingroup
+	\blx@getdata{#1}%
+	\blx@setoptions@type\abx@field@entrytype
+	\blx@setoptions@entry
+	\blx@thelabelnumber
+	\blx@addprefixnumber
+	\addtocounter{instcount}\@ne
+	\csuse{bbx@tabenv@\blx@theenv}\relax
+	\endgroup}
+
+\def\bbx@tab@item#1{% 定义每行参考文献的具体内容
+	\begingroup
+	\blx@getdata{#1}%
+	\blx@setoptions@type\abx@field@entrytype
+	\blx@setoptions@entry
+	\csuse{blx@item@\blx@theenv}\relax
+	\blx@initsep
+	\blx@namesep
+	\csuse{blx@hook@bibitem}%
+	\blx@execute
+	\blx@initunit
+	%	\blx@anchor %此参数会造成额外空行
+	\blx@beglang
+	\bibsentence
+	\blx@pagetracker
+	\blx@driver\abx@field@entrytype
+	\blx@postpunct
+	\blx@endlang
+	\endgroup}
+
+% user-level command for defining tabular bibliography format
+\newrobustcmd*{\defbibtabular}[5]{%
+	\long\csdef{blx@env@#1}{#2}%
+	\long\csdef{blx@endenv@#1}{#3}%
+	\long\csdef{bbx@tabenv@#1}{#4}%
+	\long\csdef{blx@item@#1}{#5}}
+
+% user-level access to some entry options
+\def\useeditorfalse{\togglefalse{blx@useeditor}}
+\def\usetranslatorfalse{\togglefalse{blx@usetranslator}}
+
+\makeatother
+
+% sortname labels (a robust style should add provision for missing labelnames)
+\newbibmacro*{sortname}{% 表格第一列内容
+	\renewcommand*{\multinamedelim}{\addslash\break}%
+	\let\finalnamedelim\multinamedelim
+	\printtext[plain]{\printnames[last-first]{labelname}}}
+%    \printfield{number}}
+
+% bibitem hook to suppress redundant sortname list   % hook 表格第二列内容
+\newbibmacro*{omitsortname}{%
+	\ifnameundef{labelname}{}{%
+		\ifnameundef{author}
+		{\ifnameundef{editor}
+			{\ifusetranslator{\clearname{translator}}{}}}
+		{\clearname{editor}}
+		{\clearname{author}}%
+		\useeditorfalse%
+		\usetranslatorfalse}}
+
+% demo new tabular bibliography format
+\defbibtabular{bibtabular}
+{\noindent
+	\begin{tabular}{| p{0.10\textwidth} < {\centering}| p{0.85\textwidth}|  }
+		\hline
+		{\songti 序号}  & \multicolumn{1}{c|}{\songti 文献目录(作者、题目、刊物名、出版时间、页次)} \\
+		\hline
+	}
+	{  \hline \end{tabular}  \indent }
+{\usebibmacro{sortname}}
+{\usebibmacro{omitsortname}}
+
+%\bibliographystyle{Biblio/gbt-7714-2015-numerical}
+% 设置参考文献文件
+\addbibresource{Biblio/ref.bib}
+\newcommand{\cmd}[1]{\texttt{\textbackslash #1}}

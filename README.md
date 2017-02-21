@@ -89,6 +89,28 @@ nudtProposal.tex 中的注释已有详细说明：
 ```
 以上方案可以产生与figure和table同样的效果，只是不能浮动。
 
+# TexStudio内置pdf阅读器不显示中文的解决方案
+
+在使用模版过程中，发现texstudio的内嵌pdf阅读器不显示文档的中文内容（其他pdf阅读器可以正确显示），给编辑文档带来不便。经过实验发现，必须强制嵌入字体到pdf才能使texstudio内置pdf阅读器正确显示论文。将字体内嵌入pdf文件的命令如下：
+```
+pdf2ps  name.pdf  # pdf转换成ps文件
+ps2pdf14 -dPDFSETTINGS=/prepress name.ps # ps转换成pdf并嵌入字体
+```
+
+据此提出以下解决方案：
+
++ 在texstudio的“选项”->“构建”中添加用户命令“embedfonts:embedfonts”：
+```
+pdf2ps %.pdf | ps2pdf14 -dPDFSETTINGS=/prepress %.ps | rm %.ps
+```
++ 修改默认构建命令如下：
+```
+txs:///xelatex | txs:///embedfonts
+```
+
+点击"编译"按钮，则论文可以正确显示了。使用此方案前请确保pdf2ps，ps2pdf14命令在系统PATH中，并且可以正确执行。注意这个方案会使得Adobe Acrobat对pdf的编辑能力下降，如果最终版本不需要嵌入字体，可以先还原默认构建命令为XeLaTex，再编译提交。
+
+
 # 免责声明
 本模板免费提供于同学们使用或修改，但is provided "As IS"。使用本模板产生的任何问题作者不承担任何直接或者间接责任。但作者会尽力帮助有需要的同学解决问题。
 

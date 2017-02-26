@@ -89,9 +89,20 @@ nudtProposal.tex 中的注释已有详细说明：
 ```
 以上方案可以产生与figure和table同样的效果，只是不能浮动。
 
-# TexStudio内置pdf阅读器不显示中文的解决方案
+# Texlive的安装方法
+Texlive官网：https://www.tug.org/texlive/acquire-netinstall.html
+Windows安装程序（在线）：http://mirror.ctan.org/systems/texlive/tlnet/install-tl-windows.exe
+Ubuntu可以直接安装：` sudo apt-get install texlive-full`
+Mac OS X安装方法：http://www.tug.org/mactex/
 
-在使用模版过程中，发现texstudio的内嵌pdf阅读器不显示文档的中文内容（其他pdf阅读器可以正确显示），给编辑文档带来不便。经过实验发现，必须强制嵌入字体到pdf才能使texstudio内置pdf阅读器正确显示论文。将字体内嵌入pdf文件的命令如下：
+注意，一些Windows旧版本的MiKTex不带biber，无法编译参考文献，请更新为最新版本的texlive。
+
+# 有时候参考文献不能及时更新的解决方案
+作者在使用中发现个别时候texstudio并不能自动检测到参考文献更新了，故而提供一种手动更新参考文献的方法：执行“工具”->“编译”（快捷键F6）；执行“工具”->“命令”->“biber”（可以在选项中设置这个命令的快捷键为F4）；再次执行编译。这样参考文献就手动更新了。
+
+# Ubuntu、Mac系统TexStudio内置pdf阅读器不显示中文的解决方案
+
+在使用模版过程中，发现部分Ubuntu或者Mac操作系统上texstudio的内嵌pdf阅读器不显示文档的中文内容（其他pdf阅读器可以正确显示），给编辑文档带来不便。经过实验发现，必须强制嵌入字体到pdf才能使texstudio内置pdf阅读器正确显示论文。将字体内嵌入pdf文件的命令如下：
 ```
 pdf2ps  name.pdf  # pdf转换成ps文件
 ps2pdf14 -dPDFSETTINGS=/prepress name.ps # ps转换成pdf并嵌入字体
@@ -99,7 +110,7 @@ ps2pdf14 -dPDFSETTINGS=/prepress name.ps # ps转换成pdf并嵌入字体
 
 据此提出以下解决方案：
 
-+ 在texstudio的“选项”->“构建”中添加用户命令“embedfonts:embedfonts”：
++ 在texstudio的“选项”->“构建”中勾选“显示高级选项”，并添加用户命令“embedfonts:embedfonts”：
 ```
 pdf2ps %.pdf | ps2pdf14 -dPDFSETTINGS=/prepress %.ps | rm %.ps
 ```

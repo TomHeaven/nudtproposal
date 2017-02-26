@@ -79,10 +79,20 @@
 \newbibmacro{type}{\iffieldundef{type}{}{\printfield{type}}}
 \newbibmacro{number}{\iffieldundef{number}{}{\printfield{number}}}
 
-\DeclareNameFormat{default}{%
-	\usebibmacro{name:first-last}{#1}{#4}{#5}{#7}%
-	\usebibmacro{name:andothers}%
-}
+% for texlive-2015
+%\DeclareNameFormat{default}{%
+%	\usebibmacro{name:first-last}{#1}{#4}{#5}{#7}%
+%	\usebibmacro{name:andothers}%
+%}
+% for texlive-2016
+\DeclareNameFormat{sortname}{%
+    \nameparts{#1}
+     \usebibmacro{name:family}
+      {\namepartfamily}
+      {\namepartgiven}
+      {\namepartprefix}
+      {\namepartsuffix}%
+     }
 \DeclareNameAlias{sortname}{default}
 
 \newbibmacro{author+others}{%

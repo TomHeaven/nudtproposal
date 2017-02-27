@@ -5,6 +5,14 @@
 \usepackage{tabularx}  % 表格宽度
 \usepackage{multirow} % 表格单元格合并
 \usepackage{caption}   % 图表标题
+% demo new tabular bibliography format
+\usepackage{csquotes}
+\usepackage[american]{babel}
+%\usepackage[backend=biber, bibstyle=numeric, citestyle=numeric]{biblatex} % 设定引用格式
+%\usepackage[backend=biber, style=caspervector,utf8, sorting=nty]{biblatex} % 设定引用格式
+\usepackage[backend=biber, style=Biblio/nudtcaspervector,utf8, sorting=none]{biblatex} % 设定引用格式
+%\usepackage[backend=biber, style=gbt77142005, utf8]{biblatex} % 设定引用格式
+\usepackage{longtable}
 
 
 % 重定义图表标题
@@ -21,6 +29,8 @@
 \titleformat{\subsubsection}{\kaishu \small}{\thesubsubsection}{5 pt}{}
 % 定义upcite
 \newcommand{\upcite}[1]{\textsuperscript{ [\cite{#1}]  }} % 中文引用
+%\newcommand{\upcite}[6]{\textsuperscript{ [\cite{#1,#2,#3,#4,#5,#6}] }} % 中文引用
+
 \newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}} % 单元格换行
 % 首页图案
 \schoollogo{scale=0.35}{nudt_logo}% university logo
@@ -39,13 +49,7 @@
 	\ifstrequal{#1}{yes}{\newcommand\printbib{\printbibtabular[title={~}]}	}{	\newcommand\printbib{\printbibliography[title={~}]}}
 }
 
-% demo new tabular bibliography format
-\usepackage{csquotes}
-\usepackage[american]{babel}
-%\usepackage[backend=biber, bibstyle=numeric, citestyle=numeric]{biblatex} % 设定引用格式
-%\usepackage[backend=biber, style=caspervector,utf8, sorting=nty]{biblatex} % 设定引用格式
-\usepackage[backend=biber, style=Biblio/nudtcaspervector,utf8, sorting=none]{biblatex} % 设定引用格式
-%\usepackage[backend=biber, style=gbt77142005, utf8]{biblatex} % 设定引用格式
+
 
 \makeatletter
 % user-level command for printing tabular bibliography
@@ -165,14 +169,15 @@
 % demo new tabular bibliography format
 \defbibtabular{bibtabular}
 {\noindent
-	\begin{tabular}{| p{0.10\textwidth} < {\centering}| p{0.85\textwidth}|  }
+	\begin{longtable}{| p{0.10\textwidth} < {\centering}| p{0.85\textwidth}|  }
 		\hline
 		{\songti 序号}  & \multicolumn{1}{c|}{\songti 文献目录(作者、题目、刊物名、出版时间、页次)} \\
 		\hline
 	}
-	{  \hline \end{tabular}  \indent }
+	{  \hline \end{longtable}  \indent }
 {\usebibmacro{sortname}}
 {\usebibmacro{omitsortname}}
 
 %\bibliographystyle{Biblio/gbt-7714-2015-numerical}
+%\addbibresource{Biblio/ref.bib}
 \newcommand{\cmd}[1]{\texttt{\textbackslash #1}}

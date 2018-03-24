@@ -146,7 +146,7 @@
 \def\@title{\NUDT@value@titlemark}
 % 开题报告类型
 \newcommand\proposaltype[1]{%	
-	\ifstrequal{#1}{doctor}{	\def\NUDT@value@proposal{博士研究生学位论文}	}{	\def\NUDT@value@proposal{硕士研究生学位论文}}
+	\ifstrequal{#1}{doctor}{	\def\NUDT@value@proposall{\NUDTunderline{博士}研究生学位论文}	\def\NUDT@value@proposal{博士研究生学位论文}}{	\def\NUDT@value@proposal{硕士研究生学位论文}}
 }
 % 是否启用目录
 \newcommand{\enabletableofcontents}[1]{
@@ -199,7 +199,7 @@
     \vspace*{13 pt}
 
    % \begin{tabular}{c}
-    {\fontsize{28}{12}\selectfont \mdseries \NUDT@value@proposal} \\ 
+    {\fontsize{28}{12}\selectfont \mdseries \NUDT@value@proposall} \\ 
      \vspace*{20pt}
     {\fontsize{28}{12}\selectfont \mdseries 开题报告}
    % \end{tabular}
@@ -290,7 +290,7 @@
   % 设置正文页眉
   \pagestyle{fancy}
   \lhead{ \includegraphics[width=1cm]{Img/nudt_logo}}  % left header
-  \chead{ \songti 国防科学技术大学\NUDT@value@proposal 开题报告 \vspace*{-5pt} \\} % center header
+  \chead{ \songti 国防科技大学\NUDT@value@proposal 开题报告 \vspace*{-5pt} \\} % center header
   \rhead{} % empty right header
   \cfoot{\footnotesize\thepage}
 }

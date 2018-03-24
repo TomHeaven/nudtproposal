@@ -2,7 +2,7 @@
 
 # 前言
 
-用过latex就会知道它的好，但是没有模板的时候真的很痛。所以“NUDT 硕士博士研究生开题报告 latex 模板”应运而生了。
+用过 latex 就会知道它的好，但是没有模板的时候真的很痛。所以“NUDT 硕士博士研究生开题报告 latex 模板”应运而生了。
 
 这里必须吐槽：
 
@@ -11,8 +11,8 @@
 
 # 更新日志
 
-2018.03.24 更新为二〇一八年一月版本格式
-2017.03.09 修正了参考文献文件不能被 texstudio 自动检测到的问题。
+- 2018.03.24 更新为二〇一八年一月版本格式
+- 2017.03.09 修正了参考文献文件不能被 texstudio 自动检测到的问题。
 
 # 用法
 
@@ -50,6 +50,7 @@ nudtProposal.tex 中的注释已有详细说明：
 \institute{信息系统与管理学院}% 学院
 \chinesedate{2018~年~03~月~23日} % 开题日期
 \formdate{二零一八年一月}     % 制表月份 注意：用“〇”可能会出现字体不显示的问题，所以这里改为了“零”
+```
 
 ## 图表插入
 
@@ -84,18 +85,18 @@ nudtProposal.tex 中的注释已有详细说明：
 ```
 以上方案可以产生与 figure 和 table 同样的效果，只是不能浮动。
 
-# Texlive的安装方法
+# Texlive 的安装方法
 
-Texlive 官网：https://www.tug.org/texlive/acquire-netinstall.html
-Windows 安装程序（在线）：http://mirror.ctan.org/systems/texlive/tlnet/install-tl-windows.exe
-Ubuntu 可以直接安装：` sudo apt-get install texlive-full`
-macOS 安装方法：http://www.tug.org/mactex/
+- Texlive 官网：<https://www.tug.org/texlive/acquire-netinstall.html>
+- Windows 安装程序（在线）：<http://mirror.ctan.org/systems/texlive/tlnet/install-tl-windows.exe>
+- Ubuntu 可以直接安装：`sudo apt-get install texlive-full`
+- macOS 安装方法：<http://www.tug.org/mactex/>
 
 注意，一些 Windows 旧版本的 MiKTex 不带 biber，无法编译参考文献，请更新为最新版本的 texlive。
 
 # 有时候参考文献不能及时更新的解决方案
 
-作者在使用中发现个别时候texstudio并不能自动检测到参考文献更新了，故而提供一种手动更新参考文献的方法：执行“工具”->“编译”（快捷键F6）；执行“工具”->“命令”->“biber”（可以在选项中设置这个命令的快捷键为 F4）；再次执行编译。这样参考文献就手动更新了。
+作者在使用中发现个别时候 texstudio 并不能自动检测到参考文献更新了，故而提供一种手动更新参考文献的方法：执行“工具”->“编译”（快捷键F6）；执行“工具”->“命令”->“biber”（可以在选项中设置这个命令的快捷键为 F4）；再次执行编译。这样参考文献就手动更新了。
 
 # macOS 系统 TexStudio 内置 pdf 阅读器不显示中文的解决方案
 
@@ -117,7 +118,6 @@ txs:///xelatex | txs:///embedfonts
 ```
 
 点击"编译"按钮，则论文可以正确显示了。使用此方案前请确保 pdf2ps，ps2pdf14 命令在系统 PATH 中，并且可以正确执行。注意这个方案会使得 Adobe Acrobat 对pdf 的编辑能力下降，如果最终版本不需要嵌入字体，可以先还原默认构建命令为 XeLaTex，再编译提交。
-
 
 # 免责声明
 

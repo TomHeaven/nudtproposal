@@ -146,7 +146,7 @@
 \def\@title{\NUDT@value@titlemark}
 % 开题报告类型
 \newcommand\proposaltype[1]{%	
-	\ifstrequal{#1}{doctor}{	\def\NUDT@value@proposall{\NUDTunderline{博士}研究生学位论文}	\def\NUDT@value@proposal{博士研究生学位论文}}{	\def\NUDT@value@proposal{硕士研究生学位论文}}
+	\ifstrequal{#1}{doctor}{	\def\NUDT@value@proposall{\NUDTunderline{博士}研究生学位论文}	\def\NUDT@value@proposal{博士研究生学位论文}}{\def\NUDT@value@proposall{\NUDTunderline{硕士}研究生学位论文}	\def\NUDT@value@proposal{硕士研究生学位论文}}
 }
 % 是否启用目录
 \newcommand{\enabletableofcontents}[1]{

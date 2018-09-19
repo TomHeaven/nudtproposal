@@ -23,10 +23,12 @@
 
 % 重定义标题格式
 %\titleformat{command}[shape]{format}{label}{sep}{before-code}{after-code}
-\titleformat{\section}{\heiti}{\thesection、}{5 pt}{}
+\titleformat{\section}{\heiti \zihao{-4}}{\thesection .}{5 pt}{}
 \titlespacing*{\section} {0pt}{0ex}{.2ex} % 设置标题前后间距
-\titleformat{\subsection}{\kaishu \small \bfseries}{\thesubsection}{5 pt}{}
-\titleformat{\subsubsection}{\kaishu \small}{\thesubsubsection}{5 pt}{}
+\titleformat{\subsection}{\kaishu \zihao{5} \bfseries}{\thesubsection}{5 pt}{}
+\titlespacing*{\subsection} {0pt}{0ex}{.2ex}
+\titleformat{\subsubsection}{\kaishu \zihao{5}}{\thesubsubsection}{5 pt}{}
+\titlespacing*{\subsubsection} {0pt}{0ex}{.2ex}
 % 定义upcite
 \newcommand{\upcite}[1]{\textsuperscript{ [\cite{#1}]  }} % 中文引用
 %\newcommand{\upcite}[6]{\textsuperscript{ [\cite{#1,#2,#3,#4,#5,#6}] }} % 中文引用
@@ -41,14 +43,11 @@
 	\edef\x{\endgroup\noexpand\in@{#1}{#2}}\x\ifin@}
 \makeatother
 
-
 % 修改参考文献格式
 % 开题报告类型
 \newcommand\enabletablebib[1]{%	
 	\ifstrequal{#1}{yes}{\newcommand\printbib{\printbibtabular[title={~}]}	}{	\newcommand\printbib{\printbibliography[title={~}]}}
 }
-
-
 
 \makeatletter
 % user-level command for printing tabular bibliography

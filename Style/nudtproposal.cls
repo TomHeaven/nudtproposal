@@ -56,6 +56,7 @@
 \RequirePackage[usenames,dvipsnames,table]{xcolor}%
 %% math packages
 \RequirePackage{amsmath,amssymb,amstext}
+\RequirePackage[includeheadfoot]{geometry}
 %%%%% --------------------------------------------------------------------------------
 %%
 %%%%************************ Load Class Configuretion ********************************
@@ -68,31 +69,9 @@
 
 %%%%% --------------------------------------------------------------------------------
 %%
-%%%%******************************* Page Layout **************************************
-%%
-%% part one -- horizontal widths
-%% left side width + textwidth + right side width = paperwidth
-%% left side width of [odd, even] page = [odd, even]sidemargin + 1.0in (fixed) + hoffset
-%% binding side width + textwidth + nonbinding side width = paperwidth
-%% binding side width of [odd, even] page = [left, right] side width
-%% assuming A4 paper (210mm x 297mm)
-\setlength{\textwidth}{150mm}% set required text width first
-\ifNUDT@printcopy% if print copy layout enabled
-  \setlength{\oddsidemargin}{10mm}% binding side width
-  \setlength{\evensidemargin}{0mm}% ensure uniform binding side width for printing
-\else
-  \setlength{\oddsidemargin}{5mm}% left side width
-  \setlength{\evensidemargin}{5mm}% ensure uniform left side width for EThesis
-\fi
- %% set margin for notes to zero
-\setlength{\marginparwidth}{0pt}% width of margin notes
-\setlength{\marginparsep}{0pt}% width of space between body text and margin notes
-%% part two -- vertical heights
-%% top height + textheight + bottom height = paperheight
-%% top height = 1.0in (fixed) + voffset + topmargin + headheight + headsep 
-\setlength{\textheight}{240mm}% set required text height first
-\setlength{\voffset}{-15mm}% set a minimum header height
-\setlength{\headheight}{15pt}% set a minimum header height
+%%%%******************************* Page Layout **************************************%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\geometry{top=27mm,bottom=25.4mm,left=30mm,right=30mm}
+\geometry{headheight=7.7mm,headsep=4.3mm,footskip=7.9mm}
 %% specifies the amount of space between paragraphs.
 \setlength{\parskip}{0.5ex plus 0.25ex minus 0.25ex}
 %% line spacing
@@ -236,24 +215,26 @@
   \clearpage
 
   %%%% 说明页
-   \thispagestyle{empty}
+  \thispagestyle{empty}
   \begin{center}
-  	{\heiti \large 说 明}
+  	{\heiti \zihao{2} 说 \qquad 明}
   \end{center}
   	{\songti 
   	\begin{enumerate}[label={\chinese*、},labelsep=0pt]
+	\addtolength{\itemsep}{-.5\baselineskip}%缩小条目之间的间距
   		\item 开题报告应按下述要求打印后装订成册：
-  		\begin{enumerate}[label={\arabic*、},labelsep=0pt]
+  		\begin{enumerate}[label={\arabic*.},labelsep=0pt]
+		\addtolength{\itemsep}{-.3\baselineskip}%缩小条目之间的间距，下面类似
   			\item 	使用A4白纸，双面打印；
   			\item 	封面中填写内容使用小3号仿宋字体；
   			\item 	表中填写内容使用5号楷体字体。
   		\end{enumerate}
-  		\item 封面中的编号采用八位数编码，前四位为收件日期，精确到年月即可，第五位为院别，后三位为收件的流水编号。
+  		\item 封面中的编号由学院填写，采用八位数编码，前四位为审批日期，精确到年月即可，第五位为院别，后三位为审批流水号（按年）。如15016100，为6院15年审批的第100位开题申请者，审批时间为15年1月份。院别代码与编制序列一致，海洋科学与工程研究院代码为0。
   		\item 开题报告表中学员填写的内容包括学位论文选题的立论依据、文献综述、研究内容、研究条件、学位论文工作计划、主要参考文献等，指导教师认可学员开题报告内容后，对学员学位论文选题价值、对国内/外研究现状的了解情况、研究内容、研究方案等方面予以评价。
-  		\item 	开题报告评议小组由3-5名本学科或相关学科具有高级专业技术职务的专家（包括导师）组成，评议小组听取研究生的口头报告，并对报告内容进行评议审查。
-  		\item  	若开题报告获得通过，应根据评议小组意见对开题报告进行修改，并在开题报告会后两周内，将开题报告交学院编号并存入学员学习档案；若开题报告未获得通过，则要求在两个月内由原开题报告评议小组重新组织开题报告会。
-  	\end{enumerate}
-  
+  		\item 开题报告评议小组一般由3-5名具有正高级专业技术职务的专家（包括导师）组成，其中一名为跨一级学科的专家。
+		\item 若开题报告获得通过，应根据评议小组意见对开题报告进行修改，并在开题报告会后两周内，将评议表和修订后开题报告纸质版原件交学院备案；若开题报告未获得通过，则填报延期开题申请，由原开题报告评议小组重新组织开题报告会。
+	\end{enumerate}
+ 
     }
    \clearpage
   
@@ -289,8 +270,8 @@
   
   % 设置正文页眉
   \pagestyle{fancy}
-  \lhead{ \includegraphics[width=1cm]{Img/nudt_logo}}  % left header
-  \chead{ \songti 国防科技大学\NUDT@value@proposal 开题报告 \vspace*{-5pt} \\} % center header
+  \lhead{} 
+  \chead{ \songti 国防科技大学研究生学位论文开题报告 \vspace*{-5pt} \\} % center header
   \rhead{} % empty right header
   \cfoot{\footnotesize\thepage}
 }
@@ -305,7 +286,6 @@
 \setmainfont{Times New Roman}
 \usepackage{indentfirst}
 \usepackage{zhspacing}
-
 \setCJKmainfont[BoldFont=Adobe Heiti Std,ItalicFont=Adobe Kaiti Std]{Adobe Kaiti Std}
 \zihao{5}
 

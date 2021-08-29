@@ -9,8 +9,8 @@
 %% (at your option) any later version.
 %%
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{nudtproposal}
-  [2014/10/01 v1.0 nudtproposal
+\ProvidesClass{msrproposal}
+  [2021/08/21 v1.0 msrproposal
    document class]
 %%%%% --------------------------------------------------------------------------------
 %%
@@ -63,7 +63,7 @@
 %%
 \AtEndOfPackage{%class cfg loaded after package, makes commands at preamble take effect
   \makeatletter
-  \InputIfFileExists{Style/nudtproposal.cfg}{}{}
+  \InputIfFileExists{Style/msrproposal.cfg}{}{}
   \makeatother
 }
 
@@ -106,16 +106,71 @@
 \def\NUDTunderline{\@ifnextchar[\NUDT@underline\CJKunderline}
 %%%%% --------------------------------------------------------------------------------
 %%
+\defaultfontfeatures{Mapping=tex-text}
+\xeCJKsetcharclass{"0}{"2E7F}{0}
+\xeCJKsetcharclass{"2E80}{"FFFF}{1}
+
+% ttf字体 (Windows)
+\newcommand{\installttf}{
+	%%%%   Thesis Fonts
+	\setmainfont{Times New Roman}
+	\setsansfont{Arial}
+	\setmonofont{Courier New}
+	%%%% Using Office Family Fonts
+	\setCJKmainfont[BoldFont={STZhongsong}]{SimSun}
+	\setCJKsansfont{SimHei} % Hei
+	\setCJKmonofont{FangSong_GB2312} % Fangsong
+	%%%% alias
+	\setCJKfamilyfont{song}{SimSun}
+	\setCJKfamilyfont{hei}{SimHei}
+	\setCJKfamilyfont{fs}{FangSong_GB2312} % fang-song
+	\setCJKfamilyfont{kai}{KaiTi} % Kai
+	\setCJKfamilyfont{times}{Times New Roman} % times
+}
+\installttf
+
+\newcommand{\cusong}{\bfseries}
+\newcommand{\song}{\CJKfamily{song}}     % 宋体
+\newcommand{\fs}{\CJKfamily{fs}}         % 仿宋体
+\newcommand{\kai}{\CJKfamily{kai}}       % 楷体
+\newcommand{\hei}{\CJKfamily{hei}}       % 黑体
+\newcommand{\timesnr}{\CJKfamily{times}}   % times new roman
+\def\songti{\song}
+\def\fangsong{\fs}
+\def\kaishu{\kai}
+\def\heiti{\hei}
+\newlength\thu@linespace
+\newcommand{\thu@choosefont}[2]{%
+	\setlength{\thu@linespace}{#2*\real{#1}}%
+	\fontsize{#2}{\thu@linespace}\selectfont}
+\def\thu@define@fontsize#1#2{%
+	\expandafter\newcommand\csname #1\endcsname[1][\baselinestretch]{%
+		\thu@choosefont{##1}{#2}}}
+\thu@define@fontsize{chuhao}{42bp}
+\thu@define@fontsize{xiaochu}{36bp}
+\thu@define@fontsize{yihao}{26bp}
+\thu@define@fontsize{xiaoyi}{24bp}
+\thu@define@fontsize{erhao}{22bp}
+\thu@define@fontsize{xiaoer}{18bp}
+\thu@define@fontsize{sanhao}{16bp}
+\thu@define@fontsize{xiaosan}{15bp}
+\thu@define@fontsize{sihao}{14bp}
+\thu@define@fontsize{banxiaosi}{13bp}
+\thu@define@fontsize{xiaosi}{12bp}
+\thu@define@fontsize{dawu}{11bp}
+\thu@define@fontsize{wuhao}{10.5bp}
+\thu@define@fontsize{xiaowu}{9bp}
+\thu@define@fontsize{liuhao}{7.5bp}
+\thu@define@fontsize{xiaoliu}{6.5bp}
+\thu@define@fontsize{qihao}{5.5bp}
+\thu@define@fontsize{bahao}{5bp}
 %%%%********************** Chinese Titlepage Items ***********************************
 %%
 % \newcommand\schoollogo[2]{\def\NUDT@value@schoollogo{\includegraphics[#1]{#2}}}
 \newcommand\schoollogo[2]{\def\NUDT@value@schoollogo{\includegraphics[#1]{#2}}}
 \newcommand\schooltext[2]{\def\NUDT@value@schooltext{\includegraphics[#1]{#2}}}
 
-\newcommand\nudttitle[2]{%
-	\def\NUDT@value@sectitle{#2}	
-	\def\NUDT@value@title{#1}
-}
+
 
 \renewcommand\title[2][\NUDT@value@title]{%
  % \def\NUDT@value@sectitle{#3}	
@@ -125,26 +180,24 @@
 \def\@title{\NUDT@value@titlemark}
 % 开题报告类型
 \newcommand\proposaltype[1]{%	
-	\ifstrequal{#1}{doctor}{	\def\NUDT@value@proposall{\NUDTunderline{博士}研究生学位论文}	\def\NUDT@value@proposal{博士研究生学位论文}}{\def\NUDT@value@proposall{\NUDTunderline{硕士}研究生学位论文}	\def\NUDT@value@proposal{硕士研究生学位论文}}
+	\def\NUDT@value@type{#1}
 }
 % 是否启用目录
 \newcommand{\enabletableofcontents}[1]{
     \ifstrequal{#1}{yes}{	\def\NUDT@value@tableofcontents{\tableofcontents}	}{\def\NUDT@value@tableofcontents{}}
 }
 
+% 获取封面输入
 \newcommand\classification[1]{\def\NUDT@value@classification{#1}}
-\newcommand\proposalnumber[1]{\def\NUDT@value@proposalnumber{#1}}
-
-\newcommand\authorid[1]{\def\NUDT@value@authorid{#1}}
+\newcommand\msrtitle[2]{%
+	\def\NUDT@value@sectitle{#2}	
+	\def\NUDT@value@title{#1}
+}
+\newcommand\type[1]{\def\NUDT@value@type{#1}}
+\newcommand\institution[1]{\def\NUDT@value@institution{#1}}
 \renewcommand\author[1]{\def\NUDT@value@author{#1}}
-\newcommand\advisor[1]{\def\NUDT@value@advisor{#1}}
-\newcommand\advisortitle[1]{\def\NUDT@value@advisortitle{#1}}
-\newcommand\degree[1]{\def\NUDT@value@degree{#1}}
-\newcommand\degreetype[1]{\def\NUDT@value@degreetype{#1}}
-\newcommand\major[1]{\def\NUDT@value@major{#1}}
-\newcommand\field[1]{\def\NUDT@value@field{#1}}
-\newcommand\institute[1]{\def\NUDT@value@institute{#1}}
-\newcommand\chinesedate[1]{\def\NUDT@value@chinesedate{#1}}
+\newcommand\telephone[1]{\def\NUDT@value@telephone{#1}}
+\newcommand\applicationdate[1]{\def\NUDT@value@applicationdate{#1}}
 \newcommand\formdate[1]{\def\NUDT@value@formdate{#1}}
 
 %%%%% --------------------------------------------------------------------------------
@@ -154,62 +207,47 @@
 \renewcommand\maketitle{%
   \cleardoublepage
   \thispagestyle{empty}
-  
+  % 右上角 密级
   {
    \zihao{4}\mdseries\heiti
-   
-    \NUDT@value@schoollogo \hspace{240pt}
-    
-    \vspace{-65pt}
-
    \begin{tabular}{c c c}
-   	\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad& \NUDT@label@classification      &   {\mdseries\fangsong \NUDT@value@classification}     \\
-   	\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad& \NUDT@label@proposalnumber &   {\mdseries\fangsong \NUDT@value@proposalnumber} \\                  
+   	\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad& \NUDT@label@classification      &   {\mdseries\heiti \NUDT@value@classification}     \\          
    \end{tabular}
   }
-
-    \vspace{15pt}
-
+   % 封面标题
+   %\vspace*{5 pt}
    \begin{center}
-    \zihao{3}\bfseries\heiti
-       
-    \NUDT@value@schooltext
+   {
+   	\zihao{1}\bfseries\heiti
+    \NUDT@label@coverf \\ 
+     \vspace*{40pt}
+      \NUDT@label@covers
+   }
 
-    \vspace*{13 pt}
-
-   % \begin{tabular}{c}
-    {\fontsize{28}{12}\selectfont \mdseries \NUDT@value@proposall} \\ 
-     \vspace*{20pt}
-    {\fontsize{28}{12}\selectfont \mdseries 开题报告}
-   % \end{tabular}
-
-    \vspace*{50pt}
+    \vspace*{80pt}
 
     \def\tabcolsep{1pt}
-    \def\arraystretch{1.2}
+    \def\arraystretch{1.5} % 控制行高
     %\hskip -15pt
+    {\songti
     \begin{tabular}{lc}
-      \NUDT@label@title &  {\mdseries\fangsong \NUDTunderline[295pt]{\NUDT@value@title}} \\  &  {\mdseries\fangsong \NUDTunderline[295pt]{\NUDT@value@sectitle}}  \\
-      { \NUDT@label@authorid} & \NUDTunderline[113pt]{ \zihao{-3}\mdseries\fangsong \NUDT@value@authorid}\NUDT@label@author\NUDTunderline[113pt]{\mdseries\fangsong  \NUDT@value@author}
-    \\
-       \NUDT@label@major &  \NUDTunderline[295pt]{\mdseries\fangsong \NUDT@value@major}
-     \\
-         \NUDT@label@field &  \NUDTunderline[295pt]{\mdseries\fangsong  \NUDT@value@field}
-     \\
-      \NUDT@label@advisor & \NUDTunderline[113pt]{\mdseries\fangsong  \NUDT@value@advisor}\NUDT@label@advisortitle\NUDTunderline[113pt]{\mdseries\fangsong  \NUDT@value@advisortitle}
-    \\
-      \NUDT@label@institute & \NUDTunderline[295pt]{\mdseries\fangsong  \NUDT@value@institute}
-    \\
-      \NUDT@label@date & \NUDTunderline[295pt]{\mdseries\fangsong  \NUDT@value@chinesedate}
+      \makebox[6em][s]{\bfseries \NUDT@label@title} &  {\NUDTunderline[200pt]{\NUDT@value@title}} \\  &  {\NUDTunderline[200pt]{\NUDT@value@sectitle}}  \\
+      \makebox[6em][s]{\bfseries \NUDT@label@type} &  \NUDTunderline[200pt]{\NUDT@value@type} \\
+      \makebox[6em][s]{\bfseries \NUDT@label@institution} &  \NUDTunderline[200pt]{\NUDT@value@institution} \\
+      \makebox[6em][s]{\bfseries \NUDT@label@author} & \NUDTunderline[200pt]{\NUDT@value@author} \\
+      \makebox[6em][s]{\bfseries \NUDT@label@telephone} &  \NUDTunderline[200pt]{ \NUDT@value@telephone}  \\
+      \makebox[6em][s]{\bfseries \NUDT@label@applicationdate} &  \NUDTunderline[200pt]{ \NUDT@value@applicationdate} \\
     \end{tabular}
+    }
 
-    \vspace*{40pt}
-
- \begin{tabular}{p{400pt}<{\centering}}
-    {\mdseries \NUDT@label@mark}  \\
-    {\mdseries \NUDT@value@formdate}
- \end{tabular}
-    
+   \vspace*{80pt}
+    % 制表单位和实际
+   {\bfseries\heiti\zihao{4}
+   	    \begin{tabular}{p{400pt}<{\centering}}
+   	   	\NUDT@label@mark  \\
+   	   	\NUDT@value@formdate
+   	   \end{tabular}
+   }
   \end{center}
 
   \clearpage
@@ -217,22 +255,26 @@
   %%%% 说明页
   \thispagestyle{empty}
   \begin{center}
-  	{\heiti \zihao{2} 说 \qquad 明}
+  	{\bfseries \heiti \zihao{4} 填~写~说~明}
   \end{center}
-  	{\songti 
-  	\begin{enumerate}[label={\chinese*、},labelsep=0pt]
-	\addtolength{\itemsep}{-.5\baselineskip}%缩小条目之间的间距
-  		\item 开题报告应按下述要求打印后装订成册：
-  		\begin{enumerate}[label={\arabic*.},labelsep=0pt]
-		\addtolength{\itemsep}{-.3\baselineskip}%缩小条目之间的间距，下面类似
-  			\item 	使用A4白纸，双面打印；
-  			\item 	封面中填写内容使用小3号仿宋字体；
-  			\item 	表中填写内容使用5号楷体字体。
+  	{\kai  \zihao{4}
+  	\begin{enumerate}[label={\chinese*、},labelsep=0pt,labelindent=26pt,labelwidth=*,leftmargin=0pt,itemindent=*,align=left]
+	%\addtolength{\itemsep}{-.5\baselineskip}%缩小条目之间的间距
+  		\item 本申报书由申报装备军内科研项目的单位填写。
+  		\item 申报书经各级审核后报装备发展部综合计划局（将电子文档一同上报）。经批准的项目，申报书留装备发展部综合计划局；未被批准的项目，申报书不再退回。
+  		\item {{\bfseries 填报格式}\\
+  		{~~~~封面内容格式：四号宋体，单倍行距。正文中各级标题格式：标题2样式，小四号黑体，其中一级标题需加粗；正文内容格式：小四号宋体，首行缩进2字符；表格内容格式：五号宋体。}
+        }
+        \item {\bfseries 填报内容}
+  		\begin{enumerate}[label={\arabic*.},labelsep=7pt,labelindent=26pt,labelwidth=*,leftmargin=0pt,itemindent=*,align=left]
+		%\addtolength{\itemsep}{-.3\baselineskip}%缩小条目之间的间距，下面类似
+  			\item 	报单位应根据项目的保密要求，在封面上注明密级。
+  			\item 	项目类别。填写下列内容之一：需求分析、发展论证、作战运用研究、实验评估、特殊装备科研、装备保障研究、基础理论方法研究、论证数据工程。
+  			\item 	联系电话。需填写军线固定电话和手机。
+  			\item   填报内容可附佐证材料。
+  			\item   经费预算及安排。预算项目参照《军队科研经费使用管理规定（试行）》填写。设备费需列出详细配置。
   		\end{enumerate}
-  		\item 封面中的编号由学院填写，采用八位数编码，前四位为审批日期，精确到年月即可，第五位为院别，后三位为审批流水号（按年）。如15016100，为6院15年审批的第100位开题申请者，审批时间为15年1月份。院别代码与编制序列一致，海洋科学与工程研究院代码为0。
-  		\item 开题报告表中学员填写的内容包括学位论文选题的立论依据、文献综述、研究内容、研究条件、学位论文工作计划、主要参考文献等，指导教师认可学员开题报告内容后，对学员学位论文选题价值、对国内/外研究现状的了解情况、研究内容、研究方案等方面予以评价。
-  		\item 开题报告评议小组一般由3-5名具有正高级专业技术职务的专家（包括导师）组成，其中一名为跨一级学科的专家。
-		\item 若开题报告获得通过，应根据评议小组意见对开题报告进行修改，并在开题报告会后两周内，将评议表和修订后开题报告纸质版原件交学院备案；若开题报告未获得通过，则填报延期开题申请，由原开题报告评议小组重新组织开题报告会。
+  		\item {\bfseries 申报书按规定格式打印（A4纸，用双面打印）}。
 	\end{enumerate}
  
     }
@@ -267,27 +309,10 @@
  % \tableofcontents % 控制启用目录
   \NUDT@value@tableofcontents
   \clearpage
-  
-  % 设置正文页眉
-  \pagestyle{fancy}
-  \lhead{} 
-  \chead{ \songti 国防科技大学研究生学位论文开题报告 \vspace*{-5pt} \\} % center header
-  \rhead{} % empty right header
-  \cfoot{\footnotesize\thepage}
 }
 
-%%%%     设置字体
-\XeTeXlinebreaklocale "zh"
-\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
-\usepackage{fontspec}
-% Fonts
-\newfontfamily\zhfont[BoldFont=Adobe Kaiti Std]{Adobe Heiti Std}
-\newfontfamily\zhpunctfont{Adobe Heiti Std}
-\setmainfont{Times New Roman}
-\usepackage{indentfirst}
-\usepackage{zhspacing}
-\setCJKmainfont[BoldFont=Adobe Heiti Std,ItalicFont=Adobe Kaiti Std]{Adobe Kaiti Std}
-\zihao{5}
+% 正文字体
+\zihao{-4} \song 
 
 %%%%% --------------------------------------------------------------------------------
 \endinput

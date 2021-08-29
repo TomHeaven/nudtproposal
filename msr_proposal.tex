@@ -1,0 +1,88 @@
+%%%%% --------------------------------------------------------------------------------
+%%
+%%                           Document Template of MSR proposal
+%%
+%%%%% --------------------------------------------------------------------------------
+%% Copyright (C) Hanlin Tan <hanlin_tan@nudt.edu.cn> 
+%% This is free software: you can redistribute it and/or modify it
+%% under the terms of the GNU General Public License as published by
+%% the Free Software Foundation, either version 3 of the License, or
+%% (at your option) any later version.
+%%%%% --------------------------------------------------------------------------------
+%% Last Updated: 2021.08.29
+%%%%************************ Document Class Declaration ******************************
+%%
+\documentclass[twoside]{Style/msrproposal}% thesis template of MSR
+%%%%************************* Command Define and Settings ****************************
+%%
+\usepackage[backend=bibtex, style=Biblio/nudtcaspervector,utf8, sorting=none]{biblatex} % 设定引用格式
+% 设置参考文献文件
+\addbibresource{Biblio/ref.bib}
+\usepackage{Style/msrstyle} % 包含作者自定义的格式和命令
+\usepackage{makecell}
+\usepackage{booktabs}
+
+%%%%% ---------------------------------------------------------------------------------
+%%%%% ---------------警告：以上内容请勿随意修改，除非你清楚自己在做什么------------
+
+
+%%%%% --------------提示：修改本节内容用于设置文档，请仔细阅读---------------------
+%% 
+%% 编译环境：texlive。
+%% 推荐IDE：texstudio。
+%% 编译选项：tex编译器选择xelatex， 参考文献编译器选择bibtex。
+
+
+%% 以下参数用于设置文档首页信息
+\enabletableofcontents{no}   % 是否生成目录：如果需要目录设置为yes，否则设置为no。默认没有目录
+\classification{公开}              % 密级：公开，秘密，机密或者绝密
+\msrtitle{XXXXXXXXXX综合应用模式}{与运行机制研究} % 因title一般都很长需要两行，第一参数为第一行内容，第二个参数为第二行内容
+\type{作战运用研究}
+\institution{XXXX大学XXXX学院}
+\author{XXX}                    % 作者
+\telephone{188XXXXXXXX}  % 电话
+\applicationdate{2021~年~08~月~29日} % 申报日期
+\formdate{二〇一八年制}     % 制表月份 
+
+%% 在设置完以上参数后，修改Tex文件下对应文件以完成申请书。
+%%%%% ---------------------------------------------------------------
+
+%%%%% ---------------警告：以下内容请勿随意修改，除非你清楚自己在做什么------------
+
+%%%%******************************** Content *****************************************
+%%
+\begin{document}
+%%%%******************************** Frontmatter *************************************
+%%
+\pagenumbering{roman}% restart page numbers with arabic style
+%%% Generate Title
+%%
+\maketitle
+
+%%%%% --------------------------------------------------------------------------------
+%%
+%%%%******************************** Mainmatter **************************************
+%%
+
+%% 添加正文内容
+\pagenumbering{arabic}% restart page numbers with arabic style
+%\mdfsetup{skipabove=0pt,skipbelow=0pt}
+%% 包含正文各个章节，请编辑章节文件修改相应的内容
+\input{Tex/1_introduction.tex}%   \include ?= \input + \clearpage
+\printbibliography % 打印参考文献
+\clearpage
+\input{Tex/2_necessity.tex}%
+\clearpage
+\input{Tex/3_content_application}%
+\clearpage
+\input{Tex/4_plan.tex}%
+\clearpage
+\input{Tex/5_budget.tex}%
+\clearpage
+\input{Tex/6_feasibility.tex}%
+\clearpage
+\input{Tex/7_opinions.tex}%
+\clearpage
+
+\end{document}
+%%%%% --------------------------------------------------------------------------------

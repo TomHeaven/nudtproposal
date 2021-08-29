@@ -1,0 +1,62 @@
+%% 正文需要的宏
+%\RequirePackage[numbers,sort&compress,square]{natbib}
+\usepackage{fancyhdr}
+\usepackage{titlesec}   %设置页眉页脚的宏包
+\usepackage{fancyhdr} % 页眉页脚
+\usepackage{tabularx}  % 表格宽度
+\usepackage{multirow} % 表格单元格合并
+\usepackage{caption}   % 图表标题
+% demo new tabular bibliography format
+\usepackage{csquotes}
+\usepackage[american]{babel}
+%\usepackage[backend=biber, bibstyle=numeric, citestyle=numeric]{biblatex} % 设定引用格式
+%\usepackage[backend=biber, style=caspervector,utf8, sorting=nty]{biblatex} % 设定引用格式
+%\usepackage[backend=biber, style=Biblio/nudtcaspervector,utf8, sorting=none]{biblatex} % 设定引用格式
+%\usepackage[backend=biber, style=gbt77142005, utf8]{biblatex} % 设定引用格式
+\usepackage{longtable}
+\usepackage{zhnumber}
+
+
+% 重定义图表标题
+%\renewcommand{\figurename}{图 } 
+%\renewcommand{\tablename}{表 } 
+\captionsetup[figure]{labelfont={},name={图 },labelsep=space}
+\captionsetup[table]{labelfont={},name={表 },labelsep=space}
+
+% 重定义标题格式
+%\titleformat{command}[shape]{format}{label}{sep}{before-code}{after-code}
+\renewcommand\thesection{\zhnum{section}}
+\renewcommand \thesubsection {（\zhnum{subsection}）}
+\renewcommand \thesubsubsection {\arabic{subsubsection}}
+\titleformat{\section}{\heiti \zihao{-4}}{\thesection、}{5 pt}{}
+\titlespacing*{\section} {0pt}{0ex}{.2ex} % 设置标题前后间距
+\titleformat{\subsection}{\heiti \zihao{-4} \bfseries}{\thesubsection}{5 pt}{}
+\titlespacing*{\subsection} {0pt}{0ex}{.2ex}
+\titleformat{\subsubsection}{\heiti \zihao{-4}}{\thesubsubsection.}{5 pt}{}
+\titlespacing*{\subsubsection} {0pt}{0ex}{.2ex}
+\newcommand{\sectionnotes}[1]{{\kai \zihao{-4} \quad\quad#1}}
+% 定义upcite
+\newcommand{\upcite}[1]{\textsuperscript{ [\cite{#1}]  }} % 中文引用
+%\newcommand{\upcite}[6]{\textsuperscript{ [\cite{#1,#2,#3,#4,#5,#6}] }} % 中文引用
+% 参考文献
+\renewcommand\refname{参考文献}
+
+% 页码
+\pagestyle{fancy}  % 设置页面格式
+\fancyhf{} % 清空页眉页脚
+\renewcommand{\headrulewidth}{0pt} % 清除页眉横线
+\fancyfoot[LE,RO]{-~\thepage~-}
+
+
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}} % 单元格换行
+
+% 定义字符串比较函数
+\makeatletter
+\def\instring#1#2{TT\fi\begingroup
+	\edef\x{\endgroup\noexpand\in@{#1}{#2}}\x\ifin@}
+\makeatother
+
+
+%\bibliographystyle{Biblio/gbt-7714-2015-numerical}
+%\addbibresource{Biblio/ref.bib}
+\newcommand{\cmd}[1]{\texttt{\textbackslash #1}}

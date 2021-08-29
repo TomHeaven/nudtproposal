@@ -105,16 +105,68 @@
     \CJKunderline{\hbox to #1{\hfill#2\hfill}}}
 \def\NUDTunderline{\@ifnextchar[\NUDT@underline\CJKunderline}
 %%%%% --------------------------------------------------------------------------------
-%%
+% ttf字体 (Windows)
+\newcommand{\installttf}{
+	%%%%   Thesis Fonts
+	\setmainfont{Times New Roman}
+	\setsansfont{Arial}
+	\setmonofont{Courier New}
+	%%%% Using Office Family Fonts
+	\setCJKmainfont[BoldFont={STZhongsong}]{SimSun}
+	\setCJKsansfont{SimHei} % Hei
+	\setCJKmonofont{FangSong_GB2312} % Fangsong
+	%%%% alias
+	\setCJKfamilyfont{song}{SimSun}
+	\setCJKfamilyfont{hei}{SimHei}
+	\setCJKfamilyfont{fs}{FangSong_GB2312} % fang-song
+	\setCJKfamilyfont{kai}{KaiTi} % Kai
+	\setCJKfamilyfont{times}{Times New Roman} % times
+}
+\installttf
+
+\newcommand{\cusong}{\bfseries}
+\newcommand{\song}{\CJKfamily{song}}     % 宋体
+\newcommand{\fs}{\CJKfamily{fs}}         % 仿宋体
+\newcommand{\kai}{\CJKfamily{kai}}       % 楷体
+\newcommand{\hei}{\CJKfamily{hei}}       % 黑体
+\newcommand{\timesnr}{\CJKfamily{times}}   % times new roman
+\def\songti{\song}
+\def\fangsong{\fs}
+\def\kaishu{\kai}
+\def\heiti{\hei}
+\newlength\thu@linespace
+\newcommand{\thu@choosefont}[2]{%
+	\setlength{\thu@linespace}{#2*\real{#1}}%
+	\fontsize{#2}{\thu@linespace}\selectfont}
+\def\thu@define@fontsize#1#2{%
+	\expandafter\newcommand\csname #1\endcsname[1][\baselinestretch]{%
+		\thu@choosefont{##1}{#2}}}
+\thu@define@fontsize{chuhao}{42bp}
+\thu@define@fontsize{xiaochu}{36bp}
+\thu@define@fontsize{yihao}{26bp}
+\thu@define@fontsize{xiaoyi}{24bp}
+\thu@define@fontsize{erhao}{22bp}
+\thu@define@fontsize{xiaoer}{18bp}
+\thu@define@fontsize{sanhao}{16bp}
+\thu@define@fontsize{xiaosan}{15bp}
+\thu@define@fontsize{sihao}{14bp}
+\thu@define@fontsize{banxiaosi}{13bp}
+\thu@define@fontsize{xiaosi}{12bp}
+\thu@define@fontsize{dawu}{11bp}
+\thu@define@fontsize{wuhao}{10.5bp}
+\thu@define@fontsize{xiaowu}{9bp}
+\thu@define@fontsize{liuhao}{7.5bp}
+\thu@define@fontsize{xiaoliu}{6.5bp}
+\thu@define@fontsize{qihao}{5.5bp}
+\thu@define@fontsize{bahao}{5bp}
 %%%%********************** Chinese Titlepage Items ***********************************
 %%
-% \newcommand\schoollogo[2]{\def\NUDT@value@schoollogo{\includegraphics[#1]{#2}}}
 \newcommand\schoollogo[2]{\def\NUDT@value@schoollogo{\includegraphics[#1]{#2}}}
 \newcommand\schooltext[2]{\def\NUDT@value@schooltext{\includegraphics[#1]{#2}}}
 
 \newcommand\nudttitle[2]{%
-	\def\NUDT@value@sectitle{#2}	
 	\def\NUDT@value@title{#1}
+	\def\NUDT@value@sectitle{#2}
 }
 
 \renewcommand\title[2][\NUDT@value@title]{%
@@ -172,18 +224,16 @@
 
    \begin{center}
     \zihao{3}\bfseries\heiti
-       
     \NUDT@value@schooltext
-
+    
     \vspace*{13 pt}
-
    % \begin{tabular}{c}
-    {\fontsize{28}{12}\selectfont \mdseries \NUDT@value@proposall} \\ 
-     \vspace*{20pt}
+    {\fontsize{28}{12}\selectfont \mdseries \NUDT@value@proposall} \\
+     %\vspace*{20pt}
     {\fontsize{28}{12}\selectfont \mdseries 开题报告}
    % \end{tabular}
 
-    \vspace*{50pt}
+    \vspace*{40pt}
 
     \def\tabcolsep{1pt}
     \def\arraystretch{1.2}
@@ -286,7 +336,9 @@
 \setmainfont{Times New Roman}
 \usepackage{indentfirst}
 \usepackage{zhspacing}
-\setCJKmainfont[BoldFont=Adobe Heiti Std,ItalicFont=Adobe Kaiti Std]{Adobe Kaiti Std}
+
+% 正文字体
+\kai
 \zihao{5}
 
 %%%%% --------------------------------------------------------------------------------

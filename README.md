@@ -11,6 +11,7 @@
 
 # 更新日志
 
+- 2021.08.29 更换字体为Windows TTF字体，与硕博论文模版[NUDT Thesis](https://github.com/TomHeaven/nudt_thesis)保持一致。
 - 2018.08.21 修正部分错误，更新 readme 文件
 - 2018.03.24 更新为二〇一八年一月版本格式
 - 2017.03.09 修正了参考文献文件不能被 texstudio 自动检测到的问题。
@@ -101,33 +102,14 @@ nudtProposal.tex 中的注释已有详细说明：
 
 作者在使用中发现个别时候 texstudio 并不能自动检测到参考文献更新了，故而提供一种手动更新参考文献的方法：执行“工具”->“编译”（快捷键F6）；执行“工具”->“命令”->“biber”（可以在选项中设置这个命令的快捷键为 F4）；再次执行编译。这样参考文献就手动更新了。
 
-## 2. macOS TexStudio 内置 pdf 阅读器不显示中文的解决方案
 
-在使用模版过程中，发现部分 Ubuntu 或者 macOS 操作系统上 texstudio 的内嵌 pdf 阅读器不显示文档的中文内容（其他 pdf 阅读器可以正确显示），给编辑文档带来不便。经过实验发现，必须强制嵌入字体到 pdf 才能使 texstudio 内置 pdf 阅读器正确显示论文。将字体内嵌入 pdf 文件的命令如下：
-```
-pdf2ps  name.pdf  # pdf 转换成 ps 文件
-ps2pdf14 -dPDFSETTINGS=/prepress name.ps # ps 转换成 pdf 并嵌入字体
-```
+## 2. 安装依赖的字体
 
-据此提出以下解决方案：
+从以下链接中下载ttf.zip，并逐个安装： 
+https://github.com/TomHeaven/nudt_thesis/releases/tag/v1.1
 
-+ 在 texstudio 的“选项”->“构建”中勾选“显示高级选项”，并添加用户命令“embedfonts:embedfonts”：
-```
-pdf2ps %.pdf | ps2pdf14 -dPDFSETTINGS=/prepress %.ps | rm %.ps
-```
-+ 修改默认构建命令如下：
-```
-txs:///xelatex | txs:///embedfonts
-```
-
-点击"编译"按钮，则论文可以正确显示了。使用此方案前请确保 pdf2ps，ps2pdf14 命令在系统 PATH 中，并且可以正确执行。注意这个方案会使得 Adobe Acrobat 对pdf 的编辑能力下降，如果最终版本不需要嵌入字体，可以先还原默认构建命令为 XeLaTex，再编译提交。
-## 3. macOS 缺少 Adobe 字体的解决方案
-
-安装 Adobe 字体，下载链接 
-https://pan.baidu.com/s/1lT59XSvVppS46Ggry-EnaQ
-
-## 4. WinEdt 打不开 tex 文件 的问题
-推荐使用 texstudio（跨平台）， macOS 可使用 texpad。
+## 3. 编译时报错bbl文件中找不到citation
+确认texstudio中参考文献编译器设置为`biber`，而非`bibtex`。
 
 # 免责声明
 

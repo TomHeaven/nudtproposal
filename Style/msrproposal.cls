@@ -126,6 +126,7 @@
 	\setCJKfamilyfont{fs}{FangSong_GB2312} % fang-song
 	\setCJKfamilyfont{kai}{KaiTi} % Kai
 	\setCJKfamilyfont{times}{Times New Roman} % times
+	\setCJKfamilyfont{fzxbs}{FZXBSJW--GB1-0} % 方正小标宋体（Mac）
 }
 \installttf
 
@@ -135,6 +136,7 @@
 \newcommand{\kai}{\CJKfamily{kai}}       % 楷体
 \newcommand{\hei}{\CJKfamily{hei}}       % 黑体
 \newcommand{\timesnr}{\CJKfamily{times}}   % times new roman
+\newcommand{\fzxbsong}{\CJKfamily{fzxbs}} % 方正小标宋
 \def\songti{\song}
 \def\fangsong{\fs}
 \def\kaishu{\kai}
@@ -165,17 +167,9 @@
 \thu@define@fontsize{qihao}{5.5bp}
 \thu@define@fontsize{bahao}{5bp}
 %%%%********************** Chinese Titlepage Items ***********************************
-%%
-% \newcommand\schoollogo[2]{\def\NUDT@value@schoollogo{\includegraphics[#1]{#2}}}
-\newcommand\schoollogo[2]{\def\NUDT@value@schoollogo{\includegraphics[#1]{#2}}}
-\newcommand\schooltext[2]{\def\NUDT@value@schooltext{\includegraphics[#1]{#2}}}
 
-
-
-\renewcommand\title[2][\NUDT@value@title]{%
- % \def\NUDT@value@sectitle{#3}	
+\renewcommand\title[2][\NUDT@value@title]{
   \def\NUDT@value@title{#2}
-  %\def\NUDT@value@titlemark{\MakeUppercase{#1}}}
   \def\NUDT@value@titlemark{#1}}
 \def\@title{\NUDT@value@titlemark}
 % 开题报告类型
@@ -189,11 +183,16 @@
 
 % 获取封面输入
 \newcommand\classification[1]{\def\NUDT@value@classification{#1}}
-\newcommand\msrtitle[2]{%
-	\def\NUDT@value@sectitle{#2}	
+\newcommand\msrtitle[1]{%
 	\def\NUDT@value@title{#1}
 }
 \newcommand\type[1]{\def\NUDT@value@type{#1}}
+\newcommand\researchdirection[1]{%
+	\def\NUDT@value@researchdirection{#1}
+}
+\newcommand\field[1]{%
+	\def\NUDT@value@field{#1}
+}
 \newcommand\institution[1]{\def\NUDT@value@institution{#1}}
 \renewcommand\author[1]{\def\NUDT@value@author{#1}}
 \newcommand\telephone[1]{\def\NUDT@value@telephone{#1}}
@@ -211,16 +210,16 @@
   {
    \zihao{4}\mdseries\heiti
    \begin{tabular}{c c c}
-   	\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad& \NUDT@label@classification      &   {\mdseries\heiti \NUDT@value@classification}     \\          
+   {\mdseries\heiti \NUDT@label@classification \NUDT@value@classification}     \\          
    \end{tabular}
   }
    % 封面标题
    %\vspace*{5 pt}
    \begin{center}
    {
-   	\zihao{1}\bfseries\heiti
+   	\zihao{1}\fzxbsong
     \NUDT@label@coverf \\ 
-     \vspace*{40pt}
+     \vspace*{10pt}
       \NUDT@label@covers
    }
 
@@ -231,23 +230,16 @@
     %\hskip -15pt
     {\songti
     \begin{tabular}{lc}
-      \makebox[6em][s]{\bfseries \NUDT@label@title} &  {\NUDTunderline[200pt]{\NUDT@value@title}} \\  &  {\NUDTunderline[200pt]{\NUDT@value@sectitle}}  \\
+      \makebox[6em][s]{\bfseries \NUDT@label@title} &  {\NUDTunderline[200pt]{\NUDT@value@title}}  \\
       \makebox[6em][s]{\bfseries \NUDT@label@type} &  \NUDTunderline[200pt]{\NUDT@value@type} \\
+      \makebox[6em][s]{\bfseries \NUDT@label@researchdirection} &  \NUDTunderline[200pt]{\NUDT@value@researchdirection} \\
+      \makebox[6em][s]{\bfseries \NUDT@label@field} & \NUDTunderline[200pt]{\NUDT@value@field} \\
       \makebox[6em][s]{\bfseries \NUDT@label@institution} &  \NUDTunderline[200pt]{\NUDT@value@institution} \\
       \makebox[6em][s]{\bfseries \NUDT@label@author} & \NUDTunderline[200pt]{\NUDT@value@author} \\
       \makebox[6em][s]{\bfseries \NUDT@label@telephone} &  \NUDTunderline[200pt]{ \NUDT@value@telephone}  \\
       \makebox[6em][s]{\bfseries \NUDT@label@applicationdate} &  \NUDTunderline[200pt]{ \NUDT@value@applicationdate} \\
     \end{tabular}
     }
-
-   \vspace*{80pt}
-    % 制表单位和实际
-   {\bfseries\heiti\zihao{4}
-   	    \begin{tabular}{p{400pt}<{\centering}}
-   	   	\NUDT@label@mark  \\
-   	   	\NUDT@value@formdate
-   	   \end{tabular}
-   }
   \end{center}
 
   \clearpage
@@ -255,17 +247,17 @@
   %%%% 说明页
   \thispagestyle{empty}
   \begin{center}
-  	{\bfseries \heiti \zihao{4} 填~写~说~明}
+  	{\bfseries \heiti \zihao{-4} 填~写~说~明}
   \end{center}
   	{\kai  \zihao{4}
   	\begin{enumerate}[label={\chinese*、},labelsep=0pt,labelindent=26pt,labelwidth=*,leftmargin=0pt,itemindent=*,align=left]
 	%\addtolength{\itemsep}{-.5\baselineskip}%缩小条目之间的间距
   		\item 本申报书由申报装备军内科研项目的单位填写。
   		\item 申报书经各级审核后报装备发展部综合计划局（将电子文档一同上报）。经批准的项目，申报书留装备发展部综合计划局；未被批准的项目，申报书不再退回。
-  		\item {{\bfseries 填报格式}\\
-  		{~~~~封面内容格式：四号宋体，单倍行距。正文中各级标题格式：标题2样式，小四号黑体，其中一级标题需加粗；正文内容格式：小四号宋体，首行缩进2字符；表格内容格式：五号宋体。}
+  		\item {填报格式\par
+  		\quad\quad 封面内容格式：四号宋体，单倍行距。正文中各级标题格式：标题2样式，小四号黑体，其中一级标题需加粗；正文内容格式：小四号宋体，首行缩进2字符；表格内容格式：五号宋体。
         }
-        \item {\bfseries 填报内容}
+        \item  填报内容
   		\begin{enumerate}[label={\arabic*.},labelsep=7pt,labelindent=26pt,labelwidth=*,leftmargin=0pt,itemindent=*,align=left]
 		%\addtolength{\itemsep}{-.3\baselineskip}%缩小条目之间的间距，下面类似
   			\item 	报单位应根据项目的保密要求，在封面上注明密级。
@@ -274,7 +266,7 @@
   			\item   填报内容可附佐证材料。
   			\item   经费预算及安排。预算项目参照《军队科研经费使用管理规定（试行）》填写。设备费需列出详细配置。
   		\end{enumerate}
-  		\item {\bfseries 申报书按规定格式打印（A4纸，用双面打印）}。
+  		\item 申报书按规定格式打印（A4纸，用双面打印）。
 	\end{enumerate}
  
     }

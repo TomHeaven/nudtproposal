@@ -30,9 +30,9 @@
 \renewcommand \thesubsubsection {\arabic{subsubsection}}
 \titleformat{\section}{\heiti \zihao{-4}}{\thesection、}{5 pt}{}
 \titlespacing*{\section} {0pt}{0ex}{.2ex} % 设置标题前后间距
-\titleformat{\subsection}{\heiti \zihao{-4} \bfseries}{\thesubsection}{5 pt}{}
+\titleformat{\subsection}{\kai \zihao{-4}}{\thesubsection}{5 pt}{}
 \titlespacing*{\subsection} {0pt}{0ex}{.2ex}
-\titleformat{\subsubsection}{\heiti \zihao{-4}}{\thesubsubsection.}{5 pt}{}
+\titleformat{\subsubsection}{\kai \zihao{-4}}{\thesubsubsection.}{5 pt}{}
 \titlespacing*{\subsubsection} {0pt}{0ex}{.2ex}
 \newcommand{\sectionnotes}[1]{{\kai \zihao{-4} \quad\quad#1}}
 % 定义upcite
@@ -45,7 +45,8 @@
 \pagestyle{fancy}  % 设置页面格式
 \fancyhf{} % 清空页眉页脚
 \renewcommand{\headrulewidth}{0pt} % 清除页眉横线
-\fancyfoot[LE,RO]{-~\thepage~-}
+%\fancyfoot[LE,RO]{-~\thepage~-}
+\fancyfoot[C]{\zihao{-5} \thepage}
 
 
 \newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}} % 单元格换行

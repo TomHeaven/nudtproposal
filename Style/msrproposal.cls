@@ -9,7 +9,7 @@
 %% (at your option) any later version.
 %%
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{msrproposal}
+\ProvidesClass{Style/msrproposal}
   [2021/08/21 v1.0 msrproposal
    document class]
 %%%%% --------------------------------------------------------------------------------
@@ -70,12 +70,12 @@
 %%%%% --------------------------------------------------------------------------------
 %%
 %%%%******************************* Page Layout **************************************%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\geometry{top=27mm,bottom=25.4mm,left=30mm,right=30mm}
+\geometry{top=12mm,bottom=20mm,left=31.4mm,right=31.4mm}
 \geometry{headheight=7.7mm,headsep=4.3mm,footskip=7.9mm}
 %% specifies the amount of space between paragraphs.
 \setlength{\parskip}{0.5ex plus 0.25ex minus 0.25ex}
 %% line spacing
-\renewcommand{\baselinestretch}{1.4} % line space setting
+\renewcommand{\baselinestretch}{1.5} % line space setting
 \raggedbottom % prevent adding vertical white space in strange places
 %% default pagestyle is page number at bottom without headers and footers
 %\usepackage{titlesec}   %设置页眉页脚的宏包
@@ -172,7 +172,7 @@
   \def\NUDT@value@title{#2}
   \def\NUDT@value@titlemark{#1}}
 \def\@title{\NUDT@value@titlemark}
-% 开题报告类型
+% 报告类型
 \newcommand\proposaltype[1]{%	
 	\def\NUDT@value@type{#1}
 }
@@ -206,15 +206,17 @@
 \renewcommand\maketitle{%
   \cleardoublepage
   \thispagestyle{empty}
-  % 右上角 密级
+  % 左上角 密级
   {
+   \vspace*{-10pt}
+   \hspace{-35pt}
    \zihao{4}\mdseries\heiti
-   \begin{tabular}{c c c}
+   \begin{tabular}{c}
    {\mdseries\heiti \NUDT@label@classification \NUDT@value@classification}     \\          
    \end{tabular}
   }
    % 封面标题
-   %\vspace*{5 pt}
+   \vspace*{30pt}
    \begin{center}
    {
    	\zihao{1}\fzxbsong
@@ -223,21 +225,21 @@
       \NUDT@label@covers
    }
 
-    \vspace*{80pt}
+    \vspace*{90pt}
 
     \def\tabcolsep{1pt}
-    \def\arraystretch{1.5} % 控制行高
+    \def\arraystretch{1.35} % 控制table行高
     %\hskip -15pt
-    {\songti
+    {\songti \zihao{4}
     \begin{tabular}{lc}
-      \makebox[6em][s]{\bfseries \NUDT@label@title} &  {\NUDTunderline[200pt]{\NUDT@value@title}}  \\
-      \makebox[6em][s]{\bfseries \NUDT@label@type} &  \NUDTunderline[200pt]{\NUDT@value@type} \\
-      \makebox[6em][s]{\bfseries \NUDT@label@researchdirection} &  \NUDTunderline[200pt]{\NUDT@value@researchdirection} \\
-      \makebox[6em][s]{\bfseries \NUDT@label@field} & \NUDTunderline[200pt]{\NUDT@value@field} \\
-      \makebox[6em][s]{\bfseries \NUDT@label@institution} &  \NUDTunderline[200pt]{\NUDT@value@institution} \\
-      \makebox[6em][s]{\bfseries \NUDT@label@author} & \NUDTunderline[200pt]{\NUDT@value@author} \\
-      \makebox[6em][s]{\bfseries \NUDT@label@telephone} &  \NUDTunderline[200pt]{ \NUDT@value@telephone}  \\
-      \makebox[6em][s]{\bfseries \NUDT@label@applicationdate} &  \NUDTunderline[200pt]{ \NUDT@value@applicationdate} \\
+      \makebox[6em][s]{\bfseries \NUDT@label@title} &  {\NUDTunderline[280pt]{\NUDT@value@title}}  \\
+      \makebox[6em][s]{\bfseries \NUDT@label@type} &  \NUDTunderline[280pt]{\NUDT@value@type} \\
+      \makebox[6em][s]{\bfseries \NUDT@label@researchdirection} &  \NUDTunderline[280pt]{\NUDT@value@researchdirection} \\
+      \makebox[6em][s]{\bfseries \NUDT@label@field} & \NUDTunderline[280pt]{\NUDT@value@field} \\
+      \makebox[6em][s]{\bfseries \NUDT@label@institution} &  \NUDTunderline[280pt]{\NUDT@value@institution} \\
+      \makebox[6em][s]{\bfseries \NUDT@label@author} & \NUDTunderline[280pt]{\NUDT@value@author} \\
+      \makebox[6em][s]{\bfseries \NUDT@label@telephone} &  \NUDTunderline[280pt]{ \NUDT@value@telephone}  \\
+      \makebox[6em][s]{\bfseries \NUDT@label@applicationdate} &  \NUDTunderline[280pt]{ \NUDT@value@applicationdate} \\
     \end{tabular}
     }
   \end{center}
@@ -245,13 +247,14 @@
   \clearpage
 
   %%%% 说明页
+  \vspace*{-15pt}
   \thispagestyle{empty}
   \begin{center}
-  	{\bfseries \heiti \zihao{-4} 填~写~说~明}
+  	{\bfseries \heiti \zihao{4} 填~~写~~说~~明}
   \end{center}
   	{\kai  \zihao{4}
   	\begin{enumerate}[label={\chinese*、},labelsep=0pt,labelindent=26pt,labelwidth=*,leftmargin=0pt,itemindent=*,align=left]
-	%\addtolength{\itemsep}{-.5\baselineskip}%缩小条目之间的间距
+	    \addtolength{\itemsep}{-0.3\baselineskip} %缩小条目之间的间距
   		\item 本申报书由申报装备军内科研项目的单位填写。
   		\item 申报书经各级审核后报装备发展部综合计划局（将电子文档一同上报）。经批准的项目，申报书留装备发展部综合计划局；未被批准的项目，申报书不再退回。
   		\item {填报格式\par
@@ -259,7 +262,7 @@
         }
         \item  填报内容
   		\begin{enumerate}[label={\arabic*.},labelsep=7pt,labelindent=26pt,labelwidth=*,leftmargin=0pt,itemindent=*,align=left]
-		%\addtolength{\itemsep}{-.3\baselineskip}%缩小条目之间的间距，下面类似
+		    \addtolength{\itemsep}{-0.3\baselineskip}%缩小条目之间的间距，下面类似
   			\item 	报单位应根据项目的保密要求，在封面上注明密级。
   			\item 	项目类别。填写下列内容之一：需求分析、发展论证、作战运用研究、实验评估、特殊装备科研、装备保障研究、基础理论方法研究、论证数据工程。
   			\item 	联系电话。需填写军线固定电话和手机。

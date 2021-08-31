@@ -60,7 +60,7 @@
 		{\usebibmacro{bytranslator}}%
 	}%
 }
-\newbibmacro{urldate}{%
+\renewbibmacro{urldate}{%
 	\iffieldundef{urlyear}{}{%
 		\printtext{\cegen{检索于 }{retrieved on\addspace}}%
 		\printurldate%

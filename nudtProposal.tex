@@ -38,10 +38,15 @@
 %% [table] % enable a table package for complex tables, default is ctable
 %% [math] % enable some extra math packages
 \usepackage{Style/custom}% user defined commands
-\usepackage[backend=biber, style=Biblio/nudtcaspervector,utf8, sorting=none]{biblatex} % 设定引用格式
+\usepackage[backend=biber, bibstyle=gb7714-2015,%nature,%%加载biblatex宏包，使用参考文献
+citestyle=gb7714-2015,%,backref=true%%其中后端backend使用biber
+gbnamefmt=lowercase,
+gbpub=false % 是否显示“未知出版商”等信息从而更加符合gb7714-2015样式
+]{biblatex}%标注(引用)样式citestyle，著录样式bibstyle都采用gb7714-2015样式
 % 设置参考文献文件
 \addbibresource{Biblio/ref.bib}
 \usepackage{Style/nudtstyle} % 包含作者自定义的格式和命令
+\enabletablebib{yes}   % 参考文献是否放入表格，默认yes。
 
 %%%%% ---------------------------------------------------------------------------------
 %%%%% ---------------警告：以上内容请勿随意修改，除非你清楚自己在做什么------------
@@ -49,17 +54,10 @@
 
 %%%%% --------------提示：修改本节内容用于设置文档，请仔细阅读---------------------
 %% 
-%% 编译环境：texlive-2015。
-%% 推荐IDE：texstudio（WinXXX 太挫了）。
+%% 编译环境：texlive-2015或者texlive-2019。
+%% 推荐IDE：texstudio。
 %% 编译选项：tex编译器选择xelatex， 参考文献编译器选择biber（不能用bibtex）！
 %% 以上环境配置经过作者测试，确定可以正常使用。
-
-%%%%% ---------------提示：本参数提供一个参考文献格式BUG的临时解决方案------------
-% 是否将参考文献放入表格。这个选项的设置因为参考文献格式有一个暂时无解的BUG。设置为yes之前之前，必须先
-% 设置为no编译一次。否则正文中引用数字都是0。
-% 最终提交前将此参数改为yes编译一次。注意：设置为yes后编译第二次就会出现正文中引用数字都是0的BUG!
-% 如果设置为yes后，还需要修改正文，那么改为no，编译  两次 参考文献才会正常!
-\enabletablebib{no}   % 最终提交前将此参数改为yes编译一次! 如需修改正文，改为no后编译两次参考文献才会正常!   
 
 %% 以下参数用于设置文档首页和页眉信息
 \proposaltype{doctor}          % 研究生类别：硕士设置为master，博士设置为doctor 

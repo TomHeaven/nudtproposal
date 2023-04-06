@@ -112,7 +112,7 @@
 	\setsansfont{Arial}
 	\setmonofont{Courier New}
 	%%%% Using Office Family Fonts
-	\setCJKmainfont[BoldFont={STZhongsong}]{SimSun}
+	\setCJKmainfont{KaiTi}
 	\setCJKsansfont{SimHei} % Hei
 	\setCJKmonofont{FangSong_GB2312} % Fangsong
 	%%%% alias
@@ -330,16 +330,8 @@
 \XeTeXlinebreaklocale "zh"
 \XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
 \usepackage{fontspec}
-% Fonts
-\newfontfamily\zhfont[BoldFont=Adobe Kaiti Std]{Adobe Heiti Std}
-\newfontfamily\zhpunctfont{Adobe Heiti Std}
-\setmainfont{Times New Roman}
 \usepackage{indentfirst}
 \usepackage{zhspacing}
-
-% 正文字体
-\kai
-\zihao{5}
 
 %%%%% --------------------------------------------------------------------------------
 \endinput

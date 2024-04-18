@@ -76,10 +76,9 @@ nudtProposal.tex 中的注释已有详细说明：
 以上方案可以产生与 figure 和 table 同样的效果，只是不能浮动。
 
 # Texlive 的安装方法
-
+推荐使用texlive 2015、2019，更新版本的texlive 参考文献编译有问题!
 - Texlive 官网：<https://www.tug.org/texlive/acquire-netinstall.html>
-- Windows 安装程序（在线）：<http://mirror.ctan.org/systems/texlive/tlnet/install-tl-windows.exe>
-- Ubuntu 可以直接安装：`sudo apt-get install texlive-full`
+- texlive 2019安装程序ISO文件：<https://pi.kwarc.info/historic/systems/texlive/2019/texlive2019.iso>
 - macOS 安装方法：<http://www.tug.org/mactex/>
 
 注意，一些 Windows 旧版本的 MiKTex 不带 biber，无法编译参考文献，请更新为最新版本的 texlive。
